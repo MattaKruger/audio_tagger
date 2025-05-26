@@ -1,0 +1,18 @@
+CREATE TABLE playlists (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    title VARCHAR(255) NOT NULL,
+    description TEXT,
+    created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+    updated_AT DATETIME DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE TABLE playlist_tracks (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    playlist_id INTEGER NOT NULL,
+    track_id INTEGER NOT NULL,
+    position INTEGER NOT NULL,
+    added_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (playlist_id) REFERENCES playlists (id) ON DELETE CASCADE,
+    FOREIGN KEY (track_id) REFERENCES tracks (id) ON DELETE CASCADE,
+    UNIQUE (playlist_id, track_id)
+);
